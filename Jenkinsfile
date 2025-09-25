@@ -1,18 +1,27 @@
-pipeline{
+pipeline {
     agent any
-stages{
-    stage ('build'){
-        steps{
-            echo "run the python file"
-           sh 'python3 hello.py'
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Running hello.py..."
+                sh 'python3 hello.py'
+            }
+        }
+
+        stage('Testing') {
+            steps {
+                echo "Running tests with pytest..."
+                sh 'pip install pytest'           // Make sure pytest is available
+                sh 'pytest > result.txt'          // Run tests and save output
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                echo "Saving result.txt as artifact..."
+                archiveArtifacts artifacts: 'result.txt', fingerprint: true
+            }
         }
     }
-stage('artifactbuild'){
-    steps{
-        echo 'Archiving the artifact output'
-        archiveArtifacts artifacts: 'output.txt', fingerprint: true
-    }
-}
-
-}
 }
