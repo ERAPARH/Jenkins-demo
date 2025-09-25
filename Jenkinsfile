@@ -11,15 +11,15 @@ pipeline {
 
         stage('Testing') {
             steps {
-                echo "Running tests with pytest..."
-                sh 'pip install pytest'           // Make sure pytest is available
-                sh 'pytest > result.txt'          // Run tests and save output
+                echo "Installing and running pytest..."
+                sh 'python3 -m pip install --user pytest'
+                sh 'python3 -m pytest > result.txt'
             }
         }
 
         stage('Archive Artifact') {
             steps {
-                echo "Saving result.txt as artifact..."
+                echo "Archiving test result..."
                 archiveArtifacts artifacts: 'result.txt', fingerprint: true
             }
         }
