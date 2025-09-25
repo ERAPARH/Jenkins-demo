@@ -7,6 +7,12 @@ stages{
            sh 'python3 hello.py'
         }
     }
+stage('artifactbuild'){
+    stage{
+        echo 'Archive the artifact output'
+        archiveArtifacts: 'output.txt',fingerprint: true
+    }
+}
 
 }
 }
