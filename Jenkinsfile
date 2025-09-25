@@ -8,9 +8,9 @@ stages{
         }
     }
 stage('artifactbuild'){
-    stage{
-        echo 'Archive the artifact output'
-        archiveArtifacts: 'output.txt',fingerprint: true
+    steps{
+        echo 'Archiving the artifact output'
+        archiveArtifacts artifacts: 'output.txt', fingerprint: true
     }
 }
 
