@@ -17,7 +17,7 @@ pipeline {
             python3 -m venv venv
             ./venv/bin/python -m pip install --upgrade pip
             ./venv/bin/pip install pytest
-            ./venv/bin/pytest
+            ./venv/bin/pytest > result.txt
         '''
     }
 }
