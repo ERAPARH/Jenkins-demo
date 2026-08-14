@@ -10,12 +10,17 @@ pipeline {
         }
 
         stage('Testing') {
-            steps {
-                echo "Installing and running pytest..."
-                sh 'python3 -m pip install --user pytest'
-                sh 'python3 -m pytest > result.txt'
-            }
-        }
+    steps {
+        echo 'Creating Python virtual environment...'
+
+        sh '''
+            python3 -m venv venv
+            ./venv/bin/python -m pip install --upgrade pip
+            ./venv/bin/pip install pytest
+            ./venv/bin/pytest
+        '''
+    }
+}
 
         stage('Archive Artifact') {
             steps {
