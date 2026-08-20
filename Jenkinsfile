@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'linux-python'
+    }
 
     stages {
         stage('Build') {
