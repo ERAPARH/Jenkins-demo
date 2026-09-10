@@ -3,6 +3,10 @@ pipeline {
         label 'linux-python'
     }
 
+    tools {
+        jdk 'JDK-21'
+    }
+
     stages {
         stage('Build') {
             steps {
