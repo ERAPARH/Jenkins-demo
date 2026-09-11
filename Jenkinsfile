@@ -5,7 +5,23 @@ pipeline {
 
     tools {
         jdk 'JDK-21'
+        maven 'Maven-3'
     }
+
+    stage('Check Tools') {
+    steps {
+        sh '''
+            echo "Java:"
+            java -version
+
+            echo "Maven:"
+            mvn -version
+        '''
+    }
+}
+
+
+    
 
     stages {
         stage('Build') {
